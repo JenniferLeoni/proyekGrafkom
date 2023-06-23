@@ -11,10 +11,14 @@ public class PointLight {
 
     public PointLight(Vector3f color, Vector3f position, float intensity) {
         attenuation = new Attenuation(0, 0, 1);
-        this.color = color;
-        this.position = position;
-        this.intensity = intensity;
+        this.setColor(color);
+        this.setPosition(position);
+        this.setIntensity(intensity);
     }
+//
+//    public PointLight(){
+//        attenuation = new Attenuation(0,0,1);
+//    }
 
     public Attenuation getAttenuation() {
         return attenuation;
@@ -41,7 +45,7 @@ public class PointLight {
     }
 
     public void setColor(float r, float g, float b) {
-        color.set(r, g, b);
+        getColor().set(r, g, b);
     }
 
     public void setIntensity(float intensity) {
@@ -49,7 +53,11 @@ public class PointLight {
     }
 
     public void setPosition(float x, float y, float z) {
-        position.set(x, y, z);
+        getPosition().set(x, y, z);
+    }
+
+    public void setPosition(Vector3f position) {
+        this.position = position;
     }
 
     public static class Attenuation {

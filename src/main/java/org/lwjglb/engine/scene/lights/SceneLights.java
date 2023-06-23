@@ -29,6 +29,14 @@ public class SceneLights {
     public List<PointLight> getPointLights() {
         return pointLights;
     }
+    public void addPointLights(Vector3f color, Vector3f position, float intensity){
+        PointLight pointLight = new PointLight(color, position, intensity);
+        pointLights.add(pointLight);
+    }
+    public void addSpotLights(PointLight pointLight, Vector3f coneDirection, float cutOffAngle){
+        SpotLight spotLight = new SpotLight(pointLight, coneDirection, cutOffAngle);
+        spotLights.add(spotLight);
+    }
 
     public List<SpotLight> getSpotLights() {
         return spotLights;

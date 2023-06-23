@@ -20,6 +20,7 @@ public class Main implements IAppLogic {
     private Entity ruangEnt2;
     private Entity ruangEnt3;
     private Entity dollEnt;
+    private Entity skyBoxEnt;
     private LightControls lightControls;
 
     Camera camera;
@@ -78,15 +79,15 @@ public class Main implements IAppLogic {
         ruangEnt2.updateModelMatrix();
         scene.addEntity(ruangEnt2);
 
-//        Model ruangMod3 = ModelLoader.loadModel("ruangMod3", "resources/models/cube/grafkomm1.obj",
-//                scene.getTextureCache());
-//        scene.addModel(ruangMod3);
-//
-//        ruangEnt3 = new Entity("ruanggEnt3", ruangMod3.getId());
-//        ruangEnt3.setPosition(0, 0f, -2);
-//        ruangEnt3.setScale(10.0f);
-//        ruangEnt3.updateModelMatrix();
-//        scene.addEntity(ruangEnt3);
+        Model skyBoxMod = ModelLoader.loadModel("skyBoxMod", "resources/models/cube/MEJAKASUR.obj",
+                scene.getTextureCache());
+        scene.addModel(skyBoxMod);
+
+        skyBoxEnt = new Entity("skyBoxEnt", skyBoxMod.getId());
+        skyBoxEnt.setPosition(0, 0f, -2);
+        skyBoxEnt.setScale(10.0f);
+        skyBoxEnt.updateModelMatrix();
+        scene.addEntity(skyBoxEnt);
 
 
         SceneLights sceneLights = new SceneLights();

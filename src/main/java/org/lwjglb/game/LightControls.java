@@ -63,6 +63,13 @@ public class LightControls implements IGuiInstance {
         dirConeY = new float[]{coneDir.y};
         dirConeZ = new float[]{coneDir.z};
 
+        //add langsung
+        sceneLights.addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(0.0f, 7.0f, -1.0f), 20.0f);
+
+        //pointlights ini bikin temp pointlight dulu buat nentuin warna, posisi dkk baru ntar temp ini masukkin spotlights... var temp di reuse ae
+        PointLight temp = new PointLight(new Vector3f(0.0f,0.0f,1.0f), new Vector3f(-1.0f, 1.8f, -0.43f), 20.0f);
+        sceneLights.addSpotLights(temp, new Vector3f(0.0f,0.0f,-1.0f), 0.0f);
+
         DirLight dirLight = sceneLights.getDirLight();
         color = dirLight.getColor();
         pos = dirLight.getDirection();

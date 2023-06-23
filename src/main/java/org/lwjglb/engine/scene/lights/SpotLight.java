@@ -15,6 +15,10 @@ public class SpotLight {
         this.cutOffAngle = cutOffAngle;
         setCutOffAngle(cutOffAngle);
     }
+//
+//    public SpotLight(){
+//
+//    }
 
     public Vector3f getConeDirection() {
         return coneDirection;

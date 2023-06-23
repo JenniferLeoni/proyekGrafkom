@@ -81,7 +81,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="corretto-18" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="org.lwjglb.game.Main" />
-      <module name="GrafkomB-master - Copy (2)" />
+      <module name="proyekGrafkom" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

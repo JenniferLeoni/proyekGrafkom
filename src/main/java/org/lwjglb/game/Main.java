@@ -14,13 +14,6 @@ public class Main implements IAppLogic {
 
     private static final float MOUSE_SENSITIVITY = 0.1f;
     private static final float MOVEMENT_SPEED = 0.05f;
-    private Entity rockEntity;
-    private Entity treeEntity;
-    private Entity ruangEnt1;
-    private Entity ruangEnt2;
-    private Entity ruangEnt3;
-    private Entity dollEnt;
-    private Entity skyBoxEnt;
     private LightControls lightControls;
 
     Camera camera;
@@ -38,56 +31,76 @@ public class Main implements IAppLogic {
 
     @Override
     public void init(Window window, Scene scene, Render render) {
-        Model treeModel = ModelLoader.loadModel("tree-model", "resources/models/cube/tree.obj",
-                scene.getTextureCache());
-        scene.addModel(treeModel);
-
-        treeEntity = new Entity("tree-entity", treeModel.getId());
-        treeEntity.setPosition(0, 0f, -2);
-        treeEntity.updateModelMatrix();
-        scene.addEntity(treeEntity);
-
-
-        Model rockModel = ModelLoader.loadModel("rock-model", "resources/models/cube/Rock_9.obj",
-                scene.getTextureCache());
-        scene.addModel(rockModel);
-
-        rockEntity = new Entity("rock-entity", rockModel.getId());
-        rockEntity.setPosition(0, 0f, -2);
-        rockEntity.setScale(4.0f);
-        rockEntity.translateEntity(-2.0f, 0.0f, 0.0f);
-        rockEntity.updateModelMatrix();
-        scene.addEntity(rockEntity);
-
-        Model ruangMod1 = ModelLoader.loadModel("ruangMod1", "resources/models/cube/awal1.obj",
+        Model ruangMod1 = ModelLoader.loadModel("ruangMod1", "resources/models/cube/akhir1.obj",
                 scene.getTextureCache());
         scene.addModel(ruangMod1);
 
-        ruangEnt1 = new Entity("ruangEnt1", ruangMod1.getId());
-        ruangEnt1.setPosition(0, 0f, -2);
+        Entity ruangEnt1 = new Entity("ruangEnt1", ruangMod1.getId());
+        ruangEnt1.setPosition(0f, 0f, 0f);
         ruangEnt1.setScale(10.0f);
         ruangEnt1.updateModelMatrix();
         scene.addEntity(ruangEnt1);
 
-        Model ruangMod2 = ModelLoader.loadModel("ruangMod2", "resources/models/cube/awal2.obj",
+        Model ruangMod2 = ModelLoader.loadModel("ruangMod2", "resources/models/cube/akhir2.obj",
                 scene.getTextureCache());
         scene.addModel(ruangMod2);
 
-        ruangEnt2 = new Entity("ruanggEnt2", ruangMod2.getId());
-        ruangEnt2.setPosition(0, 0f, -2);
+        Entity ruangEnt2 = new Entity("ruanggEnt2", ruangMod2.getId());
+        ruangEnt2.setPosition(0f, 0f, 0f);
         ruangEnt2.setScale(10.0f);
         ruangEnt2.updateModelMatrix();
         scene.addEntity(ruangEnt2);
 
-        Model skyBoxMod = ModelLoader.loadModel("skyBoxMod", "resources/models/cube/MEJAKASUR.obj",
+        Model ruangMod3 = ModelLoader.loadModel("ruangMod3", "resources/models/cube/akhir3.obj",
                 scene.getTextureCache());
-        scene.addModel(skyBoxMod);
+        scene.addModel(ruangMod3);
 
-        skyBoxEnt = new Entity("skyBoxEnt", skyBoxMod.getId());
-        skyBoxEnt.setPosition(0, 0f, -2);
-        skyBoxEnt.setScale(10.0f);
-        skyBoxEnt.updateModelMatrix();
-        scene.addEntity(skyBoxEnt);
+        Entity ruangEnt3 = new Entity("ruanggEnt3", ruangMod3.getId());
+        ruangEnt3.setPosition(0f, 0f, 0f);
+        ruangEnt3.setScale(10.0f);
+        ruangEnt3.updateModelMatrix();
+        scene.addEntity(ruangEnt3);
+
+        Model kursiMod = ModelLoader.loadModel("kursiMod", "resources/models/cube/kursi.obj",
+                scene.getTextureCache());
+        scene.addModel(kursiMod);
+
+        Entity kursiEnt = new Entity("kursiEnt", kursiMod.getId());
+        kursiEnt.setPosition(0f, 0f, 0f);
+        kursiEnt.setScale(10.0f);
+        kursiEnt.updateModelMatrix();
+        scene.addEntity(kursiEnt);
+
+        Entity kursiEnt2 = new Entity("kursiEnt2", kursiMod.getId());
+        kursiEnt2.setRotation(0.0f,1.0f,0.0f,180);
+        kursiEnt2.setPosition(-25.377f, 0.0f, 21.285f);
+        kursiEnt2.setScale(10.0f);
+        kursiEnt2.updateModelMatrix();
+        scene.addEntity(kursiEnt2);
+
+        Model bayiMod = ModelLoader.loadModel("bayiMod", "resources/models/cube/bayi3.obj",
+                scene.getTextureCache());
+        scene.addModel(bayiMod);
+
+        Entity bayiEnt = new Entity("bayiEnt", bayiMod.getId());
+        bayiEnt.setPosition(-395f, 6.0f, -220f);
+        bayiEnt.setScale(9.0f);
+        bayiEnt.updateModelMatrix();
+        scene.addEntity(bayiEnt);
+
+        Entity bayiEnt2 = new Entity("bayiEnt", bayiMod.getId());
+        bayiEnt2.setPosition(-392f, 6.0f, -162f);
+        bayiEnt2.setRotation(0.0f,1.0f,0.0f,180);
+        bayiEnt2.setScale(9.0f);
+        bayiEnt2.updateModelMatrix();
+        scene.addEntity(bayiEnt2);
+
+        Entity bayiEnt3 = new Entity("bayiEnt", bayiMod.getId());
+        bayiEnt3.setPosition(-384f, 6.0f, -152f);
+        bayiEnt3.setRotation(0.0f,1.0f,0.0f,270);
+        bayiEnt3.setScale(9.0f);
+        bayiEnt3.updateModelMatrix();
+        scene.addEntity(bayiEnt3);
 
 
         SceneLights sceneLights = new SceneLights();
@@ -138,7 +151,7 @@ public class Main implements IAppLogic {
 //                    (float) Math.toRadians(-displVec.y * MOUSE_SENSITIVITY));
             camera.addRotation((float) Math.toRadians(0),
                     (float) Math.toRadians(-displVec.y * MOUSE_SENSITIVITY));
-            System.out.println(camera.getPosition());
+            System.out.println((float) camera.getPosition().x + ", " + (float) camera.getPosition().z);
         }
 
 

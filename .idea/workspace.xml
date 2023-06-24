@@ -136,7 +136,14 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="2" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.OutOfMemoryError" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="java-exception" />
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
 </project>

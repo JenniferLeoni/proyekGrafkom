@@ -12,7 +12,7 @@ public class Camera {
     private Matrix4f viewMatrix;
 
     public Camera() {
-        direction = new Vector3f();
+        setDirection(new Vector3f());
         right = new Vector3f();
         up = new Vector3f();
         position = new Vector3f();
@@ -34,8 +34,8 @@ public class Camera {
     }
 
     public void moveBackwards(float inc) {
-        viewMatrix.positiveZ(direction).negate().mul(inc);
-        position.sub(direction);
+        viewMatrix.positiveZ(getDirection()).negate().mul(inc);
+        position.sub(getDirection());
         recalculate();
     }
 
@@ -46,8 +46,8 @@ public class Camera {
     }
 
     public void moveForward(float inc) {
-        viewMatrix.positiveZ(direction).negate().mul(inc);
-        position.add(direction);
+        viewMatrix.positiveZ(getDirection()).negate().mul(inc);
+        position.add(getDirection());
         recalculate();
     }
 
@@ -84,5 +84,13 @@ public class Camera {
     public void setRotation(float x, float y) {
         rotation.set(x, y);
         recalculate();
+    }
+
+    public Vector3f getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Vector3f direction) {
+        this.direction = direction;
     }
 }

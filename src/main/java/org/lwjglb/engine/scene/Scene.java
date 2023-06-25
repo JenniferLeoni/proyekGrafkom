@@ -14,6 +14,7 @@ public class Scene {
     private Projection projection;
     private SceneLights sceneLights;
     private TextureCache textureCache;
+    private SkyBox skyBox;
 
     public Scene(int width, int height) {
         modelMap = new HashMap<>();
@@ -65,6 +66,10 @@ public class Scene {
         return textureCache;
     }
 
+    public SkyBox getSkyBox() {
+        return skyBox;
+    }
+
     public void resize(int width, int height) {
         projection.updateProjMatrix(width, height);
     }
@@ -75,5 +80,9 @@ public class Scene {
 
     public void setSceneLights(SceneLights sceneLights) {
         this.sceneLights = sceneLights;
+    }
+
+    public void setSkyBox(SkyBox skyBox) {
+        this.skyBox = skyBox;
     }
 }

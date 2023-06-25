@@ -10,8 +10,8 @@ import static org.lwjgl.opengl.GL30.*;
 
 public class SceneRender {
 
-    private static final int MAX_POINT_LIGHTS = 5;
-    private static final int MAX_SPOT_LIGHTS = 5;
+    private static final int MAX_POINT_LIGHTS = 50;
+    private static final int MAX_SPOT_LIGHTS = 50;
 
     private ShaderProgram shaderProgram;
 

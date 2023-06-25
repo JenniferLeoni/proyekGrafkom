@@ -1,7 +1,7 @@
 #version 330
 
-const int MAX_POINT_LIGHTS = 5;
-const int MAX_SPOT_LIGHTS = 5;
+const int MAX_POINT_LIGHTS = 50;
+const int MAX_SPOT_LIGHTS = 50;
 const float SPECULAR_POWER = 10;
 
 in vec3 outPosition;

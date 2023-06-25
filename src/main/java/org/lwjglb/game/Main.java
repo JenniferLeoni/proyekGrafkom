@@ -259,9 +259,13 @@ public class Main implements IAppLogic {
             headBopsJalan();
         }
         if (window.isKeyPressed(GLFW_KEY_UP)) {
-            camera.moveUp(move);
+            if (camera.getPosition().y <= 15.0f) {
+                camera.moveUp(move);
+            }
         } else if (window.isKeyPressed(GLFW_KEY_DOWN)) {
-            camera.moveDown(move);
+            if (camera.getPosition().y >= 8.0f) {
+                camera.moveDown(move);
+            }
         }
 
 //        lightControls.setSenter(camera.getPosition(), camera.getDirection());

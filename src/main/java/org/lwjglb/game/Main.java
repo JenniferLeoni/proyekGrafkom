@@ -134,6 +134,14 @@ public class Main implements IAppLogic {
         dollEnt2.updateModelMatrix();
         scene.addEntity(dollEnt2);
 
+        Entity dollEnt3 = new Entity("dollEnt", dollMod.getId());
+//        dollEnt2.setRotation(0.0f, 1.0f, 0.0f, (float) Math.toRadians(180.0));
+//        dollEnt2.setPosition(-152.8122f, 4.0f, -120.0f);
+        dollEnt2.setPosition(14.421f, 0.0f, -335f);
+        dollEnt2.setScale(2.0f);
+        dollEnt2.updateModelMatrix();
+        scene.addEntity(dollEnt2);
+
         Model bayiMod = ModelLoader.loadModel("bayiMod", "resources/models/cube/bayi3.obj",
                 scene.getTextureCache());
         scene.addModel(bayiMod);

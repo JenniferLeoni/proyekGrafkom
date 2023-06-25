@@ -4,7 +4,6 @@ import imgui.*;
 import imgui.flag.ImGuiCond;
 import org.joml.*;
 import org.lwjglb.engine.*;
-import org.lwjglb.engine.scene.Camera;
 import org.lwjglb.engine.scene.Scene;
 import org.lwjglb.engine.scene.lights.*;
 
@@ -31,17 +30,23 @@ public class LightControls implements IGuiInstance {
     private float[] spotLightX;
     private float[] spotLightY;
     private float[] spotLightZ;
-    SceneLights sceneLights;
+    private SceneLights sceneLights;
+    public void setSenter(Vector3f position, Vector3f direction){
+        PointLight temp = new PointLight(new Vector3f(1.0f,1.0f,1.0f),position, 200.0f);
+        getSceneLights().addSpotLights(temp, new Vector3f(direction.x, direction.y, direction.z), 0f);
+        System.out.println("sentDir "+ getSceneLights().getSpotLights().get(getSceneLights().getPointLights().size()-1).getConeDirection().x + " " + getSceneLights().getSpotLights().get(getSceneLights().getPointLights().size()-1).getConeDirection().z);
+        getSceneLights().getSpotLights().remove(getSceneLights().getPointLights().size()-1);
+    }
 
     public LightControls(Scene scene) {
-        sceneLights = scene.getSceneLights();
-        AmbientLight ambientLight = sceneLights.getAmbientLight();
+        setSceneLights(scene.getSceneLights());
+        AmbientLight ambientLight = getSceneLights().getAmbientLight();
         Vector3f color = ambientLight.getColor();
 
         ambientFactor = new float[]{ambientLight.getIntensity()};
         ambientColor = new float[]{color.x, color.y, color.z};
 
-        PointLight pointLight = sceneLights.getPointLights().get(0);
+        PointLight pointLight = getSceneLights().getPointLights().get(0);
         color = pointLight.getColor();
         Vector3f pos = pointLight.getPosition();
         pointLightColor = new float[]{color.x, color.y, color.z};
@@ -50,7 +55,7 @@ public class LightControls implements IGuiInstance {
         pointLightZ = new float[]{pos.z};
         pointLightIntensity = new float[]{pointLight.getIntensity()};
 
-        SpotLight spotLight = sceneLights.getSpotLights().get(0);
+        SpotLight spotLight = getSceneLights().getSpotLights().get(0);
         pointLight = spotLight.getPointLight();
         color = pointLight.getColor();
         pos = pointLight.getPosition();
@@ -66,13 +71,32 @@ public class LightControls implements IGuiInstance {
         dirConeZ = new float[]{coneDir.z};
 
         //add langsung
-        sceneLights.addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(0.0f, 7.0f, -1.0f), 20.0f);
+        //Room 1
+        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-1.5f, 20.0f, -1.1f), 5.0f);
+        //Chair+Doll Room 1
+        getSceneLights().addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(0.0f, 7.0f, -1.0f), 20.0f);
+        //OverDoorFrame Room 1
+//        sceneLights.addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(14.0f, 25.0f, -25.0f), 100.0f);
+
+        //Hallway 1
+        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 16.0f, -65.0f), 10.0f);
+        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 16.0f, -105.0f), 10.0f);
+        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 18.0f, -300.0f), 1000.0f);
+        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 18.0f, -90.0f), 1000.0f);
+        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 18.0f, -130.0f), 1000.0f);
+        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 18.0f, -150.0f), 1000.0f);
 
         //pointlights ini bikin temp pointlight dulu buat nentuin warna, posisi dkk baru ntar temp ini masukkin spotlights... var temp di reuse ae
-        PointLight temp = new PointLight(new Vector3f(0.0f,0.0f,1.0f), new Vector3f(-1.0f, 1.8f, -0.43f), 20.0f);
-        sceneLights.addSpotLights(temp, new Vector3f(0.0f,0.0f,-1.0f), 0.0f);
 
-        DirLight dirLight = sceneLights.getDirLight();
+        //Spotlight 1
+        PointLight temp = new PointLight(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(12.5f, 0.0f, -338.0f), 250.0f);
+        getSceneLights().addSpotLights(temp, new Vector3f(0.0f, 1.0f, 0.0f), 0.0f);
+
+        //Spotlight 2
+//        PointLight temp2 = new PointLight(new Vector3f(0.0f,0.0f,1.0f), new Vector3f(4.8f, 0.7f, -338.0f), 1000.0f);
+//        sceneLights.addSpotLights(temp2, new Vector3f(1.0f, 1.0f, 0.0f), 0.0f);
+
+        DirLight dirLight = getSceneLights().getDirLight();
         color = dirLight.getColor();
         pos = dirLight.getDirection();
         dirLightColor = new float[]{color.x, color.y, color.z};
@@ -163,5 +187,13 @@ public class LightControls implements IGuiInstance {
             dirLight.setIntensity(dirLightIntensity[0]);
         }
         return consumed;
+    }
+
+    public SceneLights getSceneLights() {
+        return sceneLights;
+    }
+
+    public void setSceneLights(SceneLights sceneLights) {
+        this.sceneLights = sceneLights;
     }
 }

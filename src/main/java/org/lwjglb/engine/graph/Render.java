@@ -3,6 +3,7 @@ package org.lwjglb.engine.graph;
 import org.lwjgl.opengl.GL;
 import org.lwjglb.engine.Window;
 import org.lwjglb.engine.scene.Scene;
+import org.lwjglb.game.LightControls;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -10,7 +11,7 @@ public class Render {
 
     private GuiRender guiRender;
     private SceneRender sceneRender;
-    private SkyBoxRender skyBoxRender;
+    private SkyBoxRender skyBoxRender;;
 
     public Render(Window window) {
         GL.createCapabilities();

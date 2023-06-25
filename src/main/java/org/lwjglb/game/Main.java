@@ -18,8 +18,13 @@ public class Main implements IAppLogic {
     private LightControls lightControls;
     private static final int NUM_CHUNKS = 50;
     private Entity[][] terrainEntities;
-
+    int countAnimasi = 0;
+    int countJalan = 0;
+    int countLari = 0;
+    boolean animasiStart = false;
     Camera camera;
+    Entity dollEnt2;
+    Entity hantuEnt;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -98,6 +103,18 @@ public class Main implements IAppLogic {
         kursiEnt2.updateModelMatrix();
         scene.addEntity(kursiEnt2);
 
+        Model hantuMod = ModelLoader.loadModel("hantuMod", "resources/models/cube/ghost19.obj",
+                scene.getTextureCache());
+        scene.addModel(hantuMod);
+
+        hantuEnt = new Entity("hantuEnt", hantuMod.getId());
+        hantuEnt.setRotation(0.0f, 1.0f, 0.0f, (float) Math.toRadians(180.0));
+//        hantuEnt.setPosition(-152.8122f, 0.0f, -120.0f);
+        hantuEnt.setPosition(-152.8122f, 70.0f, -120.0f);
+        hantuEnt.setScale(3.0f);
+        hantuEnt.updateModelMatrix();
+        scene.addEntity(hantuEnt);
+
         Model dollMod = ModelLoader.loadModel("dollMod", "resources/models/cube/bonek5.obj",
                 scene.getTextureCache());
         scene.addModel(dollMod);
@@ -108,6 +125,14 @@ public class Main implements IAppLogic {
         dollEnt.setScale(2.0f);
         dollEnt.updateModelMatrix();
         scene.addEntity(dollEnt);
+
+        dollEnt2 = new Entity("dollEnt", dollMod.getId());
+        dollEnt2.setRotation(0.0f, 1.0f, 0.0f, (float) Math.toRadians(180.0));
+//        dollEnt2.setPosition(-152.8122f, 4.0f, -120.0f);
+        dollEnt2.setPosition(-152.8122f, 70.0f, -120.0f);
+        dollEnt2.setScale(2.0f);
+        dollEnt2.updateModelMatrix();
+        scene.addEntity(dollEnt2);
 
         Model bayiMod = ModelLoader.loadModel("bayiMod", "resources/models/cube/bayi3.obj",
                 scene.getTextureCache());
@@ -200,8 +225,8 @@ public class Main implements IAppLogic {
         camera = scene.getCamera();
         camera.moveBackwards(15.0f);
         camera.moveUp(11.0f);
-//        camera.setPosition(-304f,camera.getPosition().y, -180f);
-
+        camera.setPosition(-17.5f,camera.getPosition().y, -20.25f);
+        camera.setRotation((float) Math.toRadians(45), (float) Math.toRadians(180));
         updateTerrain(scene);
 
     }
@@ -215,13 +240,17 @@ public class Main implements IAppLogic {
         camera = scene.getCamera();
         if (window.isKeyPressed(GLFW_KEY_W)) {
             camera.moveForward(move);
+            headBopsJalan();
         } else if (window.isKeyPressed(GLFW_KEY_S)) {
             camera.moveBackwards(move);
+            headBopsJalan();
         }
         if (window.isKeyPressed(GLFW_KEY_A)) {
             camera.moveLeft(move);
+            headBopsJalan();
         } else if (window.isKeyPressed(GLFW_KEY_D)) {
             camera.moveRight(move);
+            headBopsJalan();
         }
         if (window.isKeyPressed(GLFW_KEY_UP)) {
             camera.moveUp(move);
@@ -242,10 +271,270 @@ public class Main implements IAppLogic {
 //            System.out.println("camdir " + (float) camera.getDirection().x + " " + (float) camera.getDirection().z);
 
         }
+        float jalan = 20 * 0.02f;
+        float lari = 20 * 0.05f;
+
+        if (window.isKeyPressed(GLFW_KEY_SPACE) || animasiStart){
+            countAnimasi++;
+            System.out.println(countAnimasi);
+
+            if (countAnimasi < 40){
+                camera.addRotation(-0.023f, -0.023f);
+            }
+            if (countAnimasi > 55 && countAnimasi < 90){
+                camera.addRotation(0.0f, -0.023f);
+            }
+            if (countAnimasi > 100 && countAnimasi < 180){
+                camera.addRotation(0.0f, 0.023f);
+            }
+            if (countAnimasi > 180 && countAnimasi < 240){
+                camera.addRotation(0.023f, 0.023f);
+            }
+            if (countAnimasi > 300 && countAnimasi < 360){
+                camera.addRotation(-0.021f, -0.023f);
+            }
+            if (countAnimasi > 370 && countAnimasi < 450){
+                camera.moveForward(jalan);
+                headBopsJalan();
+            }
+            if (countAnimasi > 450 && countAnimasi < 490){
+                camera.addRotation(0.023f, 0.0f);
+            }
+            if (countAnimasi > 500 && countAnimasi < 540){
+                camera.addRotation(-0.023f, 0.021f);
+            }
+            if (countAnimasi > 540 && countAnimasi < 660){
+                camera.addRotation(0.0f, -0.023f);
+            }
+            if (countAnimasi > 660 && countAnimasi < 730){
+                camera.moveForward(jalan);
+                headBopsJalan();
+            }
+            if (countAnimasi > 730 && countAnimasi < 770){
+                camera.addRotation(0.0f, 0.02f);
+            }
+            if (countAnimasi > 780 && countAnimasi < 900){
+                camera.addRotation(0.0f, -0.02f);
+            }
+            if (countAnimasi > 910 && countAnimasi < 960){
+                camera.moveForward(jalan);
+                headBopsJalan();
+            }
+            if (countAnimasi > 960 && countAnimasi < 1000){
+                camera.addRotation(0.0f, -0.02f);
+            }
+            if (countAnimasi > 1150 && countAnimasi < 1250){
+                camera.addRotation(0.0f, -0.02f);
+            }
+            if (countAnimasi > 1400 && countAnimasi < 1500){
+                camera.addRotation(0.0f, -0.02f);
+            }
+            if (countAnimasi > 1500 && countAnimasi < 1550){
+                if (camera.getPosition().x<14.30) {
+                    camera.moveForward(jalan);
+                    headBopsJalan();
+                }
+            }
+            if (countAnimasi > 1550 && countAnimasi < 1700){
+                if (Math.toDegrees(camera.getRotation().y) >-360){
+                    camera.addRotation(0.0f, -0.02f);
+                }
+            }
+            if (countAnimasi == 1700){
+                camera.setRotation(0.0f, 0.0f);
+            }
+            if (countAnimasi > 1710 && countAnimasi < 2400) {
+                if (camera.getPosition().z > -280.0f) {
+                    camera.moveForward(jalan);
+                    headBopsJalan();
+                }
+            }
+            if (countAnimasi > 2450 && countAnimasi < 2700){
+                if (Math.toDegrees(camera.getRotation().y) < 180){
+                    camera.addRotation(0.0f, 0.03f);
+                }
+            }
+            if (countAnimasi > 2630 && countAnimasi < 2900) {
+                if (camera.getPosition().z < -179.5f) {
+                    camera.moveForward(jalan);
+                    headBopsJalan();
+                }
+            }
+            if (countAnimasi > 2900 && countAnimasi < 2983){
+                if (Math.toDegrees(camera.getRotation().y) < 270){
+                    camera.addRotation(0.0f, 0.03f);
+                }
+            }
+            if (countAnimasi == 2983){
+                camera.setRotation(0.0f,(float) Math.toRadians(270));
+            }
+            if (countAnimasi > 2983 && countAnimasi < 3800) {
+                if (camera.getPosition().x > -313.0f) {
+                    camera.moveForward(jalan);
+                    headBopsJalan();
+                }
+            }
+            if (countAnimasi > 3850 && countAnimasi < 3995) {
+                if (Math.toDegrees(camera.getRotation().y) > 180){
+                    camera.addRotation(0.0f, -0.01f);
+                }
+                camera.moveForward(jalan);
+                headBopsJalan();
+            }
+            if (countAnimasi > 4020 && countAnimasi < 4200) {
+                camera.addRotation(0.0f, 0.02f);
+            }
+            if (countAnimasi > 4220 && countAnimasi < 4500) {
+                if (Math.toDegrees(camera.getRotation().y) < 450){
+                    camera.addRotation(0.0f, 0.005f);
+                }
+                if (camera.getPosition().x < -325.0f || camera.getPosition().z > -179) {
+                    camera.moveForward(jalan * 2.5f);
+                    headBopsJalan();
+                }
+            }
+            if (countAnimasi == 4500) {
+                camera.setRotation(0.0f, (float) Math.toRadians(90));
+            }
+            if (countAnimasi > 4500 && countAnimasi < 4720) {
+                if (camera.getPosition().x < -153.0f) {
+                    camera.moveForward(jalan*2);
+                    headBopsJalan();
+                }
+            }
+            if (countAnimasi > 4720 && countAnimasi < 4780) {
+                if (Math.toDegrees(camera.getRotation().y) < 180) {
+                    camera.addRotation(0.0f, 0.03f);
+                }
+            }
+            if (countAnimasi == 4781){
+                camera.setPosition(-152.8122f, camera.getPosition().y, -179.6281f);
+                camera.setRotation(new Vector2f(0.0f, (float) Math.toRadians(181f)));
+            }
+            if (countAnimasi > 4780 && countAnimasi < 4890){
+                camera.moveForward(jalan);
+                headBopsJalan();
+            }
+            if (countAnimasi > 4890 && countAnimasi < 4938){
+                camera.addRotation(0.0f, -0.02f);
+            }
+            if (countAnimasi > 4938 && countAnimasi < 5030){
+                camera.moveForward(jalan);
+                headBopsJalan();
+            }
+            if (countAnimasi > 5030 && countAnimasi < 5061){
+                camera.addRotation(0.0f, 0.02f);
+            }
+            if (countAnimasi > 5061 && countAnimasi < 5085){
+                camera.moveForward(jalan);
+                headBopsJalan();
+            }
+            if (countAnimasi > 5085 && countAnimasi < 5120){
+                camera.addRotation(0.0f, 0.02f);
+            }
+            if (countAnimasi > 5120 && countAnimasi < 5170){
+                camera.moveForward(jalan);
+                headBopsJalan();
+            }
+            if (countAnimasi > 5170 && countAnimasi < 5323){
+                camera.addRotation(0.0f, 0.02f);
+            }
+            if (countAnimasi > 5323 && countAnimasi < 5370){
+                camera.moveForward(jalan);
+                headBopsJalan();
+            }
+            if (countAnimasi == 5370){
+                dollEnt2.setPosition(-152.8122f, 4.0f, -120.0f);
+                dollEnt2.updateModelMatrix();
+            }
+            if (countAnimasi > 5370 && countAnimasi < 5455){
+                camera.addRotation(0.0f, -0.025f);
+                camera.moveForward(jalan);
+                headBopsJalan();
+            }
+            if (countAnimasi > 5470 && countAnimasi < 5520){
+                camera.addRotation(0.0f, 0.03f);
+            }
+            if (countAnimasi > 5520 && countAnimasi < 5562){
+                camera.addRotation(0.0f, 0.008f);
+                camera.moveForward(jalan*2);
+                headBopsJalan();
+            }
+            if (countAnimasi > 5562 && countAnimasi < 5715){
+                camera.addRotation(0.0f, -0.02f);
+            }
+            if (countAnimasi == 5735){
+                dollEnt2.setPosition(-152.8122f, 70.0f, -120.0f);
+                dollEnt2.updateModelMatrix();
+                hantuEnt.setPosition(-152.8122f, 0.0f, -120.0f);
+                hantuEnt.updateModelMatrix();
+            }
+            if (countAnimasi > 5735 && countAnimasi < 5763){
+                hantuEnt.translateEntity(0.0f,0.0f,-1.2f);
+                hantuEnt.updateModelMatrix();
+            }
+            if (countAnimasi > 5755 && countAnimasi < 5762){
+                if (Math.toDegrees(camera.getRotation().y) < 360.0f) {
+                    camera.addRotation(0.0f, 0.5f);
+                }
+            }
+            if (countAnimasi == 5762){
+                camera.setPosition(-153.90182f,camera.getPosition().y, -158.9697f);
+                camera.setRotation(0.0f,(float) Math.toRadians(0));
+            }
+            if (countAnimasi > 5762 && countAnimasi < 6454){
+                camera.moveForward(lari);
+                headBopsLari();
+            }
+            if (countAnimasi > 6070 && countAnimasi < 6123){
+                if (Math.toDegrees(camera.getDirection().y) < 90.0f) {
+                    camera.addRotation(0.0f, 0.03f);
+                }
+            }
+            if (countAnimasi > 6454){
+                camera.moveForward(jalan*0.7f);
+                headBopsJalan();
+            }
+            if (countAnimasi > 6454 && countAnimasi < 6500){
+                camera.addRotation(0.0f, -0.02f);
+            }
+            if (countAnimasi > 6500 && countAnimasi < 6600){
+                camera.addRotation(0.0f, 0.02f);
+            }
+
+            System.out.println(Math.toDegrees(camera.getRotation().x)+ " , " + Math.toDegrees(camera.getRotation().y));
+        }
+
 
 
     }
 
+    public void headBopsJalan(){
+        if (countJalan <= 10){
+            camera.moveUp(0.1f);
+        }
+        else {
+            camera.moveDown(0.1f);
+        }
+        if (countJalan > 19){
+            countJalan = 0;
+        }
+        countJalan++;
+        System.out.println("countjalan:" + countJalan);
+    }
+    public void headBopsLari(){
+        if (countJalan <= 10){
+            camera.moveUp(0.3f);
+        }
+        else {
+            camera.moveDown(0.3f);
+        }
+        if (countJalan > 19){
+            countJalan = 0;
+        }
+        countJalan++;
+        System.out.println("countjalan:" + countJalan);
+    }
     @Override
     public void update(Window window, Scene scene, long diffTimeMillis) {
         // Nothing to be done here

@@ -10,8 +10,8 @@ import static org.lwjgl.opengl.GL30.*;
 
 public class SceneRender {
 
-    private static final int MAX_POINT_LIGHTS = 5;
-    private static final int MAX_SPOT_LIGHTS = 5;
+    private int MAX_POINT_LIGHTS = 50;
+    private int MAX_SPOT_LIGHTS = 50;
 
     private ShaderProgram shaderProgram;
 
@@ -24,7 +24,12 @@ public class SceneRender {
         shaderProgram = new ShaderProgram(shaderModuleDataList);
         createUniforms();
     }
-
+    public void updateMaxPL(int i){
+        MAX_POINT_LIGHTS = i;
+    }
+    public void updateMaxSL(int i){
+        MAX_SPOT_LIGHTS = i;
+    }
     public void cleanup() {
         shaderProgram.cleanup();
     }

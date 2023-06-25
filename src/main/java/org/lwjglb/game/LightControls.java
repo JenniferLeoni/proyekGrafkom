@@ -30,80 +30,109 @@ public class LightControls implements IGuiInstance {
     private float[] spotLightX;
     private float[] spotLightY;
     private float[] spotLightZ;
-    private SceneLights sceneLights;
-    public void setSenter(Vector3f position, Vector3f direction){
-        PointLight temp = new PointLight(new Vector3f(1.0f,1.0f,1.0f),position, 200.0f);
-        getSceneLights().addSpotLights(temp, new Vector3f(direction.x, direction.y, direction.z), 0f);
-        System.out.println("sentDir "+ getSceneLights().getSpotLights().get(getSceneLights().getPointLights().size()-1).getConeDirection().x + " " + getSceneLights().getSpotLights().get(getSceneLights().getPointLights().size()-1).getConeDirection().z);
-        getSceneLights().getSpotLights().remove(getSceneLights().getPointLights().size()-1);
-    }
-
+    SceneLights sceneLights;
     public LightControls(Scene scene) {
         setSceneLights(scene.getSceneLights());
-        AmbientLight ambientLight = getSceneLights().getAmbientLight();
-        Vector3f color = ambientLight.getColor();
+        AmbientLight ambientLight = new AmbientLight(0.58f, new Vector3f(0.101f,0.082f,0.027f));
+        sceneLights.setAmbientLight(ambientLight);
 
-        ambientFactor = new float[]{ambientLight.getIntensity()};
-        ambientColor = new float[]{color.x, color.y, color.z};
-
-        PointLight pointLight = getSceneLights().getPointLights().get(0);
-        color = pointLight.getColor();
-        Vector3f pos = pointLight.getPosition();
-        pointLightColor = new float[]{color.x, color.y, color.z};
-        pointLightX = new float[]{pos.x};
-        pointLightY = new float[]{pos.y};
-        pointLightZ = new float[]{pos.z};
-        pointLightIntensity = new float[]{pointLight.getIntensity()};
-
-        SpotLight spotLight = getSceneLights().getSpotLights().get(0);
-        pointLight = spotLight.getPointLight();
-        color = pointLight.getColor();
-        pos = pointLight.getPosition();
-        spotLightColor = new float[]{color.x, color.y, color.z};
-        spotLightX = new float[]{pos.x};
-        spotLightY = new float[]{pos.y};
-        spotLightZ = new float[]{pos.z};
-        spotLightIntensity = new float[]{pointLight.getIntensity()};
-        spotLightCuttoff = new float[]{spotLight.getCutOffAngle()};
-        Vector3f coneDir = spotLight.getConeDirection();
-        dirConeX = new float[]{coneDir.x};
-        dirConeY = new float[]{coneDir.y};
-        dirConeZ = new float[]{coneDir.z};
+//        Vector3f color = ambientLight.getColor();
+//        ambientFactor = new float[]{0.28f};
+//        ambientColor = new float[]{0.101f,0.082f,0.027f};
+//
+//        PointLight pointLight = getSceneLights().getPointLights().get(0);
+//        color = pointLight.getColor();
+//        Vector3f pos = pointLight.getPosition();
+//        pointLightColor = new float[]{color.x, color.y, color.z};
+//        pointLightX = new float[]{pos.x};
+//        pointLightY = new float[]{pos.y};
+//        pointLightZ = new float[]{pos.z};
+//        pointLightIntensity = new float[]{pointLight.getIntensity()};
+//
+//        SpotLight spotLight = getSceneLights().getSpotLights().get(0);
+//        pointLight = spotLight.getPointLight();
+//        color = pointLight.getColor();
+//        pos = pointLight.getPosition();
+//        spotLightColor = new float[]{color.x, color.y, color.z};
+//        spotLightX = new float[]{pos.x};
+//        spotLightY = new float[]{pos.y};
+//        spotLightZ = new float[]{pos.z};
+//        spotLightIntensity = new float[]{pointLight.getIntensity()};
+//        spotLightCuttoff = new float[]{spotLight.getCutOffAngle()};
+//        Vector3f coneDir = spotLight.getConeDirection();
+//        dirConeX = new float[]{coneDir.x};
+//        dirConeY = new float[]{coneDir.y};
+//        dirConeZ = new float[]{coneDir.z};
 
         //add langsung
         //Room 1
-        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-1.5f, 20.0f, -1.1f), 5.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-1.5f, 20.0f, -1.1f), 5.0f);
         //Chair+Doll Room 1
-        getSceneLights().addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(0.0f, 7.0f, -1.0f), 20.0f);
-        //OverDoorFrame Room 1
+        sceneLights.addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(0.0f, 7.0f, -1.0f), 20.0f);
+        //DoorFrame Room 1
 //        sceneLights.addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(14.0f, 25.0f, -25.0f), 100.0f);
 
         //Hallway 1
-        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 16.0f, -65.0f), 10.0f);
-        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 16.0f, -105.0f), 10.0f);
-        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 18.0f, -300.0f), 1000.0f);
-        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 18.0f, -90.0f), 1000.0f);
-        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 18.0f, -130.0f), 1000.0f);
-        getSceneLights().addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 18.0f, -150.0f), 1000.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 16.0f, -60.0f), 10.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 16.0f, -100.0f), 10.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 16.0f, -140.0f), 10.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 16.0f, -180.0f), 10.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 16.0f, -220.0f), 10.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(14.0f, 16.0f, -260.0f), 10.0f);
+
+        //Hallway 2
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-32.0f, 16.0f, -180.0f), 10.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-72.0f, 16.0f, -180.0f), 10.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-112.0f, 16.0f, -180.0f), 10.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-152.5f, 16.0f, -180.0f), 10.0f);
+
+        //Doll Room Door frame
+        sceneLights.addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(-303.0f, 16.0f, -180.0f), 100.0f);
+
+        //Doll Room
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-370.0f, 16.0f, -180.0f), 6.0f);
+
+        //Room 2
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-152.5f, 16.0f, -95.0f), 75.0f);
+
+        //Hallway 3
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-152.5f, 16.0f, -500.0f), 10.0f);
 
         //pointlights ini bikin temp pointlight dulu buat nentuin warna, posisi dkk baru ntar temp ini masukkin spotlights... var temp di reuse ae
+        //Spotlight 1 (End of Hallway 1)
+        PointLight temp = new PointLight(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(12.5f, 0.0f, -338.0f), 250.0f);
+        sceneLights.addSpotLights(temp, new Vector3f(0.0f, 1.0f, 0.0f), 0.0f);
+
+        //Doll Room Light
+//        PointLight temp2 = new PointLight(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(-325.0f, 5.0f, -220.0f), 1000.0f);
+//        sceneLights.addSpotLights(temp2, new Vector3f(1.0f, 1.0f, 0.0f), 0.0f);
+
+        //Table lamp
+//        PointLight temp2 = new PointLight(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(-122.5f, 7.0f, -95.0f), 1000.0f);
+//        sceneLights.addSpotLights(temp2, new Vector3f(1.0f, -1.0f, 0.0f), 135.0f);
+
+        //Spotlight 2
+//        PointLight temp2 = new PointLight(new Vector3f(0.0f,0.0f,1.0f), new Vector3f(4.8f, 0.7f, -338.0f), 1000.0f);
+//        sceneLights.addSpotLights(temp2, new Vector3f(1.0f, 1.0f, 0.0f), 0.0f);
 
         //Spotlight 1
-        PointLight temp = new PointLight(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(12.5f, 0.0f, -338.0f), 250.0f);
+        temp = new PointLight(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(12.5f, 0.0f, -338.0f), 250.0f);
         getSceneLights().addSpotLights(temp, new Vector3f(0.0f, 1.0f, 0.0f), 0.0f);
 
         //Spotlight 2
 //        PointLight temp2 = new PointLight(new Vector3f(0.0f,0.0f,1.0f), new Vector3f(4.8f, 0.7f, -338.0f), 1000.0f);
 //        sceneLights.addSpotLights(temp2, new Vector3f(1.0f, 1.0f, 0.0f), 0.0f);
 
-        DirLight dirLight = getSceneLights().getDirLight();
-        color = dirLight.getColor();
-        pos = dirLight.getDirection();
-        dirLightColor = new float[]{color.x, color.y, color.z};
-        dirLightX = new float[]{pos.x};
-        dirLightY = new float[]{pos.y};
-        dirLightZ = new float[]{pos.z};
-        dirLightIntensity = new float[]{dirLight.getIntensity()};
+        DirLight dirLight = new DirLight(new Vector3f(0.353f, 0.345f, 0.408f), new Vector3f(0.0f,0.0f,0.0f), 0.54f);
+        sceneLights.setDirLight(dirLight);
+
+//        color = dirLight.getColor();
+//        pos = dirLight.getDirection();
+//        dirLightColor = new float[]{0.3529f, 0.345f, 0.407f};
+//        dirLightX = new float[]{pos.x};
+//        dirLightY = new float[]{pos.y};
+//        dirLightZ = new float[]{pos.z};
+//        dirLightIntensity = new float[]{0.24f};
     }
 
     @Override

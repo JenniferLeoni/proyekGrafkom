@@ -12,10 +12,10 @@ public class SceneLights {
     private List<SpotLight> spotLights;
 
     public SceneLights() {
-        ambientLight = new AmbientLight();
+        setAmbientLight(new AmbientLight());
         pointLights = new ArrayList<>(100);
         spotLights = new ArrayList<>(100);
-        dirLight = new DirLight(new Vector3f(1, 1, 1), new Vector3f(0, 1, 0), 1.0f);
+        setDirLight(new DirLight(new Vector3f(1, 1, 1), new Vector3f(0, 1, 0), 1.0f));
     }
 
     public AmbientLight getAmbientLight() {
@@ -44,5 +44,13 @@ public class SceneLights {
 
     public void setSpotLights(List<SpotLight> spotLights) {
         this.spotLights = spotLights;
+    }
+
+    public void setAmbientLight(AmbientLight ambientLight) {
+        this.ambientLight = ambientLight;
+    }
+
+    public void setDirLight(DirLight dirLight) {
+        this.dirLight = dirLight;
     }
 }

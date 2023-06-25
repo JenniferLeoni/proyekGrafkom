@@ -59,7 +59,7 @@ public class GuiRender {
     }
 
     public void render(Scene scene) {
-        IGuiInstance guiInstance = scene.getGuiInstance();
+        IGuiInstance guiInstance = null;
         if (guiInstance == null) {
             return;
         }

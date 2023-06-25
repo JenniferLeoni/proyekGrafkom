@@ -20,7 +20,7 @@ public class Main implements IAppLogic {
     private Entity[][] terrainEntities;
     int countAnimasi = 0;
     int countJalan = 0;
-    int countLari = 0;
+    int countLoop = 0;
     boolean animasiStart = false;
     Camera camera;
     Entity dollEnt2;
@@ -225,8 +225,6 @@ public class Main implements IAppLogic {
         camera = scene.getCamera();
         camera.moveBackwards(15.0f);
         camera.moveUp(11.0f);
-        camera.setPosition(-17.5f,camera.getPosition().y, -20.25f);
-        camera.setRotation((float) Math.toRadians(45), (float) Math.toRadians(180));
         updateTerrain(scene);
 
     }
@@ -275,10 +273,15 @@ public class Main implements IAppLogic {
         float lari = 20 * 0.05f;
 
         if (window.isKeyPressed(GLFW_KEY_SPACE) || animasiStart){
+            if (countAnimasi == 0){
+                camera.setPosition(-17.5f,camera.getPosition().y, -20.25f);
+                camera.setRotation((float) Math.toRadians(45), (float) Math.toRadians(180));
+            }
+
             countAnimasi++;
             System.out.println(countAnimasi);
 
-            if (countAnimasi < 40){
+            if (countAnimasi < 40 && countLoop == 0){
                 camera.addRotation(-0.023f, -0.023f);
             }
             if (countAnimasi > 55 && countAnimasi < 90){
@@ -293,98 +296,98 @@ public class Main implements IAppLogic {
             if (countAnimasi > 300 && countAnimasi < 360){
                 camera.addRotation(-0.021f, -0.023f);
             }
-            if (countAnimasi > 370 && countAnimasi < 450){
+            if (countAnimasi > 370 && countAnimasi < 450 && countLoop == 0){
                 camera.moveForward(jalan);
                 headBopsJalan();
             }
-            if (countAnimasi > 450 && countAnimasi < 490){
+            if (countAnimasi > 450 && countAnimasi < 490 && countLoop == 0){
                 camera.addRotation(0.023f, 0.0f);
             }
-            if (countAnimasi > 500 && countAnimasi < 540){
+            if (countAnimasi > 500 && countAnimasi < 540 && countLoop == 0){
                 camera.addRotation(-0.023f, 0.021f);
             }
-            if (countAnimasi > 540 && countAnimasi < 660){
+            if (countAnimasi > 540 && countAnimasi < 660 && countLoop == 0){
                 camera.addRotation(0.0f, -0.023f);
             }
-            if (countAnimasi > 660 && countAnimasi < 730){
+            if (countAnimasi > 660 && countAnimasi < 730 && countLoop == 0){
                 camera.moveForward(jalan);
                 headBopsJalan();
             }
-            if (countAnimasi > 730 && countAnimasi < 770){
+            if (countAnimasi > 730 && countAnimasi < 770 && countLoop == 0){
                 camera.addRotation(0.0f, 0.02f);
             }
-            if (countAnimasi > 780 && countAnimasi < 900){
+            if (countAnimasi > 780 && countAnimasi < 900 && countLoop == 0){
                 camera.addRotation(0.0f, -0.02f);
             }
-            if (countAnimasi > 910 && countAnimasi < 960){
+            if (countAnimasi > 910 && countAnimasi < 960 && countLoop == 0){
                 camera.moveForward(jalan);
                 headBopsJalan();
             }
-            if (countAnimasi > 960 && countAnimasi < 1000){
+            if (countAnimasi > 960 && countAnimasi < 1000 && countLoop == 0){
                 camera.addRotation(0.0f, -0.02f);
             }
-            if (countAnimasi > 1150 && countAnimasi < 1250){
+            if (countAnimasi > 1150 && countAnimasi < 1250 && countLoop == 0){
                 camera.addRotation(0.0f, -0.02f);
             }
-            if (countAnimasi > 1400 && countAnimasi < 1500){
+            if (countAnimasi > 1400 && countAnimasi < 1500 && countLoop == 0){
                 camera.addRotation(0.0f, -0.02f);
             }
-            if (countAnimasi > 1500 && countAnimasi < 1550){
+            if (countAnimasi > 1500 && countAnimasi < 1550 && countLoop == 0){
                 if (camera.getPosition().x<14.30) {
                     camera.moveForward(jalan);
                     headBopsJalan();
                 }
             }
-            if (countAnimasi > 1550 && countAnimasi < 1700){
+            if (countAnimasi > 1550 && countAnimasi < 1700 && countLoop == 0){
                 if (Math.toDegrees(camera.getRotation().y) >-360){
                     camera.addRotation(0.0f, -0.02f);
                 }
             }
-            if (countAnimasi == 1700){
+            if (countAnimasi == 1700 && countLoop == 0){
                 camera.setRotation(0.0f, 0.0f);
             }
-            if (countAnimasi > 1710 && countAnimasi < 2400) {
+            if (countAnimasi > 1710 && countAnimasi < 2400 && countLoop == 0) {
                 if (camera.getPosition().z > -280.0f) {
                     camera.moveForward(jalan);
                     headBopsJalan();
                 }
             }
-            if (countAnimasi > 2450 && countAnimasi < 2700){
+            if (countAnimasi > 2450 && countAnimasi < 2700 && countLoop == 0){
                 if (Math.toDegrees(camera.getRotation().y) < 180){
                     camera.addRotation(0.0f, 0.03f);
                 }
             }
-            if (countAnimasi > 2630 && countAnimasi < 2900) {
+            if (countAnimasi > 2630 && countAnimasi < 2900 && countLoop == 0) {
                 if (camera.getPosition().z < -179.5f) {
                     camera.moveForward(jalan);
                     headBopsJalan();
                 }
             }
-            if (countAnimasi > 2900 && countAnimasi < 2983){
+            if (countAnimasi > 2900 && countAnimasi < 2983 && countLoop == 0){
                 if (Math.toDegrees(camera.getRotation().y) < 270){
                     camera.addRotation(0.0f, 0.03f);
                 }
             }
-            if (countAnimasi == 2983){
+            if (countAnimasi == 2983 && countLoop == 0){
                 camera.setRotation(0.0f,(float) Math.toRadians(270));
             }
-            if (countAnimasi > 2983 && countAnimasi < 3800) {
+            if (countAnimasi > 2983 && countAnimasi < 3800 && countLoop == 0) {
                 if (camera.getPosition().x > -313.0f) {
                     camera.moveForward(jalan);
                     headBopsJalan();
                 }
             }
-            if (countAnimasi > 3850 && countAnimasi < 3995) {
+            if (countAnimasi > 3850 && countAnimasi < 3995 && countLoop == 0) {
                 if (Math.toDegrees(camera.getRotation().y) > 180){
                     camera.addRotation(0.0f, -0.01f);
                 }
                 camera.moveForward(jalan);
                 headBopsJalan();
             }
-            if (countAnimasi > 4020 && countAnimasi < 4200) {
+            if (countAnimasi > 4020 && countAnimasi < 4200 && countLoop == 0) {
                 camera.addRotation(0.0f, 0.02f);
             }
-            if (countAnimasi > 4220 && countAnimasi < 4500) {
+            if (countAnimasi > 4220 && countAnimasi < 4500 && countLoop == 0) {
                 if (Math.toDegrees(camera.getRotation().y) < 450){
                     camera.addRotation(0.0f, 0.005f);
                 }
@@ -393,115 +396,119 @@ public class Main implements IAppLogic {
                     headBopsJalan();
                 }
             }
-            if (countAnimasi == 4500) {
+            if (countAnimasi == 4500 && countLoop == 0) {
                 camera.setRotation(0.0f, (float) Math.toRadians(90));
             }
-            if (countAnimasi > 4500 && countAnimasi < 4720) {
+            if (countAnimasi > 4500 && countAnimasi < 4720 && countLoop == 0) {
                 if (camera.getPosition().x < -153.0f) {
                     camera.moveForward(jalan*2);
                     headBopsJalan();
                 }
             }
-            if (countAnimasi > 4720 && countAnimasi < 4780) {
+            if (countAnimasi > 4720 && countAnimasi < 4780 && countLoop == 0) {
                 if (Math.toDegrees(camera.getRotation().y) < 180) {
                     camera.addRotation(0.0f, 0.03f);
                 }
             }
-            if (countAnimasi == 4781){
+            if (countAnimasi == 4781 && countLoop == 0){
                 camera.setPosition(-152.8122f, camera.getPosition().y, -179.6281f);
                 camera.setRotation(new Vector2f(0.0f, (float) Math.toRadians(181f)));
             }
-            if (countAnimasi > 4780 && countAnimasi < 4890){
+            if (countAnimasi > 4780 && countAnimasi < 4890 && countLoop == 0){
                 camera.moveForward(jalan);
                 headBopsJalan();
             }
-            if (countAnimasi > 4890 && countAnimasi < 4938){
+            if (countAnimasi > 4890 && countAnimasi < 4938 && countLoop == 0){
                 camera.addRotation(0.0f, -0.02f);
             }
-            if (countAnimasi > 4938 && countAnimasi < 5030){
+            if (countAnimasi > 4938 && countAnimasi < 5030 && countLoop == 0){
                 camera.moveForward(jalan);
                 headBopsJalan();
             }
-            if (countAnimasi > 5030 && countAnimasi < 5061){
+            if (countAnimasi > 5030 && countAnimasi < 5061 && countLoop == 0){
                 camera.addRotation(0.0f, 0.02f);
             }
-            if (countAnimasi > 5061 && countAnimasi < 5085){
+            if (countAnimasi > 5061 && countAnimasi < 5085 && countLoop == 0){
                 camera.moveForward(jalan);
                 headBopsJalan();
             }
-            if (countAnimasi > 5085 && countAnimasi < 5120){
+            if (countAnimasi > 5085 && countAnimasi < 5120 && countLoop == 0){
                 camera.addRotation(0.0f, 0.02f);
             }
-            if (countAnimasi > 5120 && countAnimasi < 5170){
+            if (countAnimasi > 5120 && countAnimasi < 5170 && countLoop == 0){
                 camera.moveForward(jalan);
                 headBopsJalan();
             }
-            if (countAnimasi > 5170 && countAnimasi < 5323){
+            if (countAnimasi > 5170 && countAnimasi < 5323 && countLoop == 0){
                 camera.addRotation(0.0f, 0.02f);
             }
-            if (countAnimasi > 5323 && countAnimasi < 5370){
+            if (countAnimasi > 5323 && countAnimasi < 5370 && countLoop == 0){
                 camera.moveForward(jalan);
                 headBopsJalan();
             }
-            if (countAnimasi == 5370){
+            if (countAnimasi == 5370 && countLoop == 0){
                 dollEnt2.setPosition(-152.8122f, 4.0f, -120.0f);
                 dollEnt2.updateModelMatrix();
             }
-            if (countAnimasi > 5370 && countAnimasi < 5455){
+            if (countAnimasi > 5370 && countAnimasi < 5455 && countLoop == 0){
                 camera.addRotation(0.0f, -0.025f);
                 camera.moveForward(jalan);
                 headBopsJalan();
             }
-            if (countAnimasi > 5470 && countAnimasi < 5520){
+            if (countAnimasi > 5470 && countAnimasi < 5520 && countLoop == 0){
                 camera.addRotation(0.0f, 0.03f);
             }
-            if (countAnimasi > 5520 && countAnimasi < 5562){
+            if (countAnimasi > 5520 && countAnimasi < 5562 && countLoop == 0){
                 camera.addRotation(0.0f, 0.008f);
                 camera.moveForward(jalan*2);
                 headBopsJalan();
             }
-            if (countAnimasi > 5562 && countAnimasi < 5715){
+            if (countAnimasi > 5562 && countAnimasi < 5715 && countLoop == 0){
                 camera.addRotation(0.0f, -0.02f);
             }
-            if (countAnimasi == 5735){
+            if (countAnimasi == 5735 && countLoop == 0){
                 dollEnt2.setPosition(-152.8122f, 70.0f, -120.0f);
                 dollEnt2.updateModelMatrix();
                 hantuEnt.setPosition(-152.8122f, 0.0f, -120.0f);
                 hantuEnt.updateModelMatrix();
             }
-            if (countAnimasi > 5735 && countAnimasi < 5763){
+            if (countAnimasi > 5735 && countAnimasi < 5763 && countLoop == 0){
                 hantuEnt.translateEntity(0.0f,0.0f,-1.2f);
                 hantuEnt.updateModelMatrix();
             }
-            if (countAnimasi > 5755 && countAnimasi < 5762){
+            if (countAnimasi > 5755 && countAnimasi < 5762 && countLoop == 0){
                 if (Math.toDegrees(camera.getRotation().y) < 360.0f) {
                     camera.addRotation(0.0f, 0.5f);
                 }
             }
-            if (countAnimasi == 5762){
+            if (countAnimasi == 5762 && countLoop == 0){
                 camera.setPosition(-153.90182f,camera.getPosition().y, -158.9697f);
                 camera.setRotation(0.0f,(float) Math.toRadians(0));
             }
-            if (countAnimasi > 5762 && countAnimasi < 6454){
+            if (countAnimasi > 5762 && countAnimasi < 6454 && countLoop == 0){
                 camera.moveForward(lari);
                 headBopsLari();
             }
-            if (countAnimasi > 6070 && countAnimasi < 6123){
+            if (countAnimasi > 6070 && countAnimasi < 6123 && countLoop == 0){
                 if (Math.toDegrees(camera.getDirection().y) < 90.0f) {
                     camera.addRotation(0.0f, 0.03f);
                 }
             }
-            if (countAnimasi > 6454){
+            if (countAnimasi > 6454 && countLoop == 0){
                 camera.moveForward(jalan*0.7f);
                 headBopsJalan();
             }
-            if (countAnimasi > 6454 && countAnimasi < 6500){
+            if (countAnimasi > 6454 && countAnimasi < 6500 && countLoop == 0){
                 camera.addRotation(0.0f, -0.02f);
             }
-            if (countAnimasi > 6500 && countAnimasi < 6600){
+            if (countAnimasi > 6500 && countAnimasi < 6600 && countLoop == 0){
                 camera.addRotation(0.0f, 0.02f);
             }
 
+            if (countAnimasi == 6600 && countLoop == 0){
+                countAnimasi = 0;
+                countLoop = 1;
+            }
             System.out.println(Math.toDegrees(camera.getRotation().x)+ " , " + Math.toDegrees(camera.getRotation().y));
         }
 

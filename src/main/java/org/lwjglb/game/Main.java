@@ -16,6 +16,8 @@ public class Main implements IAppLogic {
     private static final float MOUSE_SENSITIVITY = 0.1f;
     private static final float MOVEMENT_SPEED = 0.05f;
     private LightControls lightControls;
+    private static final int NUM_CHUNKS = 50;
+    private Entity[][] terrainEntities;
 
     Camera camera;
 
@@ -32,6 +34,23 @@ public class Main implements IAppLogic {
 
     @Override
     public void init(Window window, Scene scene, Render render) {
+        // Terrrain
+        String quadModelId = "quad-model";
+        Model quadModel = ModelLoader.loadModel("quad-model", "resources/models/quad/quad.obj",
+                scene.getTextureCache());
+        scene.addModel(quadModel);
+
+        int numRows = NUM_CHUNKS * 2 + 1;
+        int numCols = numRows;
+        terrainEntities = new Entity[numRows][numCols];
+        for (int j = 0; j < numRows; j++) {
+            for (int i = 0; i < numCols; i++) {
+                Entity entity = new Entity("TERRAIN_" + j + "_" + i, quadModelId);
+                terrainEntities[j][i] = entity;
+                scene.addEntity(entity);
+            }
+        }
+
         Model ruangMod1 = ModelLoader.loadModel("ruangMod1", "resources/models/cube/akhir1.obj",
                 scene.getTextureCache());
         scene.addModel(ruangMod1);
@@ -173,11 +192,17 @@ public class Main implements IAppLogic {
         lightControls = new LightControls(scene);
         scene.setGuiInstance(lightControls);
 
+
+        SkyBox skyBox = new SkyBox("resources/models/skybox/skybox.obj", scene.getTextureCache());
+        skyBox.getSkyBoxEntity().setScale(50);
+        scene.setSkyBox(skyBox);
+
         camera = scene.getCamera();
         camera.moveBackwards(15.0f);
         camera.moveUp(11.0f);
 //        camera.setPosition(-304f,camera.getPosition().y, -180f);
 
+        updateTerrain(scene);
 
     }
 
@@ -224,6 +249,30 @@ public class Main implements IAppLogic {
     @Override
     public void update(Window window, Scene scene, long diffTimeMillis) {
         // Nothing to be done here
+        updateTerrain(scene);
+    }
 
+    public void updateTerrain(Scene scene) {
+        int cellSize = 10;
+        Camera camera = scene.getCamera();
+        Vector3f cameraPos = camera.getPosition();
+        int cellCol = (int) (cameraPos.x / cellSize);
+        int cellRow = (int) (cameraPos.z / cellSize);
+
+        int numRows = NUM_CHUNKS * 2 + 1;
+        int numCols = numRows;
+        int zOffset = -NUM_CHUNKS;
+        float scale = cellSize / 2.0f;
+        for (int j = 0; j < numRows; j++) {
+            int xOffset = -NUM_CHUNKS;
+            for (int i = 0; i < numCols; i++) {
+                Entity entity = terrainEntities[j][i];
+                entity.setScale(scale);
+                entity.setPosition((cellCol + xOffset) * 2.0f, -0.01f, (cellRow + zOffset) * 2.0f);
+                entity.getModelMatrix().identity().scale(scale).translate(entity.getPosition());
+                xOffset++;
+            }
+            zOffset++;
+        }
     }
 }

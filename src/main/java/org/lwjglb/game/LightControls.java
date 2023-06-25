@@ -69,7 +69,7 @@ public class LightControls implements IGuiInstance {
         sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-1.5f, 20.0f, -1.1f), 5.0f);
         //Chair+Doll Room 1
         sceneLights.addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(0.0f, 7.0f, -1.0f), 20.0f);
-        //OverDoorFrame Room 1
+        //DoorFrame Room 1
 //        sceneLights.addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(14.0f, 25.0f, -25.0f), 100.0f);
 
         //Hallway 1
@@ -90,7 +90,7 @@ public class LightControls implements IGuiInstance {
         sceneLights.addPointLights(new Vector3f(1.0f,0.0f,0.0f), new Vector3f(-303.0f, 16.0f, -180.0f), 100.0f);
 
         //Doll Room
-//        sceneLights.addPointLights(new Vector3f(0.925f,0.65f,0.65f), new Vector3f(-370.0f, 16.0f, -180.0f), 50.0f);
+        sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-370.0f, 16.0f, -180.0f), 6.0f);
 
         //Room 2
         sceneLights.addPointLights(new Vector3f(1.0f,1.0f,1.0f), new Vector3f(-152.5f, 16.0f, -95.0f), 75.0f);

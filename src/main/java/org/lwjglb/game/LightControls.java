@@ -32,12 +32,6 @@ public class LightControls implements IGuiInstance {
     private float[] spotLightY;
     private float[] spotLightZ;
     SceneLights sceneLights;
-    public void setSenter(Vector3f position, Vector3f direction){
-        PointLight temp = new PointLight(new Vector3f(1.0f,1.0f,1.0f),position, 200.0f);
-        sceneLights.addSpotLights(temp, new Vector3f(direction.x, direction.y, direction.z), 0f);
-        System.out.println("sentDir "+ sceneLights.getSpotLights().get(sceneLights.getPointLights().size()-1).getConeDirection().x + " " + sceneLights.getSpotLights().get(sceneLights.getPointLights().size()-1).getConeDirection().z);
-        sceneLights.getSpotLights().remove(sceneLights.getPointLights().size()-1);
-    }
 
     public LightControls(Scene scene) {
         sceneLights = scene.getSceneLights();

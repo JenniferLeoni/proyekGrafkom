@@ -33,7 +33,7 @@ public class LightControls implements IGuiInstance {
     SceneLights sceneLights;
     public LightControls(Scene scene) {
         setSceneLights(scene.getSceneLights());
-        AmbientLight ambientLight = new AmbientLight(0.58f, new Vector3f(0.101f,0.082f,0.027f));
+        AmbientLight ambientLight = new AmbientLight(0.78f, new Vector3f(0.101f,0.082f,0.027f));
         sceneLights.setAmbientLight(ambientLight);
 
 //        Vector3f color = ambientLight.getColor();

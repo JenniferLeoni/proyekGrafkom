@@ -267,6 +267,15 @@ public class Main implements IAppLogic {
                 camera.moveDown(move);
             }
         }
+        if (window.isKeyPressed(GLFW_KEY_ENTER)){
+            camera.setPosition(0,camera.getPosition().y, 0);
+            camera.setRotation((float) Math.toRadians(0), (float) Math.toRadians(0));
+            countAnimasi = 0;
+            dollEnt2.setPosition(-152.8122f, 70.0f, -120.0f);
+            dollEnt2.updateModelMatrix();
+            hantuEnt.setPosition(-152.8122f, 70.0f, -120.0f);
+            hantuEnt.updateModelMatrix();
+        }
 
 //        lightControls.setSenter(camera.getPosition(), camera.getDirection());
 
